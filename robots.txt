@@ -1,6 +1,6 @@
-# Replace YOUR-DOMAIN.com with the real domain before launch
+# Site address — update if you move to your own domain
 User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+Sitemap: https://prof-mansoor-alam.netlify.app/sitemap.xml

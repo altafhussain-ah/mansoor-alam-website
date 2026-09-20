@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Replace YOUR-DOMAIN.com with the real domain before launch -->
+<!-- Site address — update if you move to your own domain -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://YOUR-DOMAIN.com/</loc>
+    <loc>https://prof-mansoor-alam.netlify.app/</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/assets/cv/Muhammad-Mansoor-Alam-CV.pdf</loc>
+    <loc>https://prof-mansoor-alam.netlify.app/assets/cv/Muhammad-Mansoor-Alam-CV.pdf</loc>
     <lastmod>2026-09-20</lastmod>
     <priority>0.6</priority>
   </url>
