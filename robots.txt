@@ -1,0 +1,6 @@
+# Replace YOUR-DOMAIN.com with the real domain before launch
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
