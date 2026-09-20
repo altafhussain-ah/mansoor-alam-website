@@ -14,7 +14,7 @@ A complete personal academic website. It is plain HTML, CSS and JavaScript: no i
 | `data/*.js` | **All the content.** One file per section. | **Yes. This is where you edit.** |
 | `assets/images/` | `profile.jpg` (the portrait) and `placeholder.svg` (shown if the photo is missing). | To swap the photo. |
 | `assets/icons/favicon.svg` | The small icon in the browser tab. | Optional. |
-| `assets/cv/` | `Muhammad-Mansoor-Alam-CV.pdf`, opened by the “View CV” and “Download CV” buttons. | To update the CV. |
+| `assets/cv/` | The CV PDF. The website no longer links to it (the CV section and buttons were removed on request). | No. |
 | `assets/documents/` | Space for any other public files (e.g. slides, certificates). | Optional. |
 | `admin/` | The admin panel: `index.html`, `config.yml` (which fields can be edited) and `jsdata-format.js` (reads and writes the data files). | Only `config.yml`, once (section 13). |
 | `assets/uploads/` | Photos and PDFs uploaded through the admin panel. | No. |
@@ -119,7 +119,7 @@ An empty list (`[]`) is safe. The section then shows a quiet “information to b
 ## 4. Swap the photo or the CV
 
 - **Photo:** save the new portrait as `assets/images/profile.jpg` so it replaces the old file. A portrait shape of about 600 × 640 px works best. If you use a different file name, update `photo.src` in `profile.js`.
-- **CV:** save the new PDF as `assets/cv/Muhammad-Mansoor-Alam-CV.pdf`. The CV published here is a copy of the supplied CV with the mobile numbers and the referees' phone numbers and e-mail addresses removed. Remove them again from any new version before you upload it.
+- **CV:** the CV section and the “Download CV” button have been removed, so visitors cannot download the CV from the site. To bring a button back, fill in *Second button* (label and link) under *1 · Profile → Hero buttons* in the admin panel.
 
 ## 5. Add a publication, project, award or certification
 
@@ -229,7 +229,7 @@ Anyone who should be able to edit the site needs a GitHub account with write acc
 
 - **Add a publication:** *4 · Publications* → **Add publication** (new items appear at the top). Give it a new unique id, e.g. `j68`.
 - **Remove an item:** click the **×** on its row. **Reorder:** drag the **═** handle.
-- **Change the photo:** *1 · Profile* → *Profile photo* → *Choose different image*. **Replace the CV:** *1 · Profile* → *Hero buttons* → *CV PDF*. Remove private phone numbers from a new CV before you upload it.
+- **Change the photo:** *1 · Profile* → *Profile photo* → *Choose different image*.
 - **Update citation figures:** *4 · Publications* → *Publication statistics*. Update **As of** at the same time.
 - Leave a field empty to show `[Information to be added]` on the site, or to hide an optional link.
 - **Safety tip:** if a list ever appears empty (e.g. “0 publications”) when you know it has items, **reload the page before saving**. Saving an empty list would remove those items from the site. They could still be recovered from GitHub's history.
