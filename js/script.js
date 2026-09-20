@@ -94,7 +94,12 @@
   /* ---------- HERO ---------- */
   function renderHero() {
     $("heroEyebrow").textContent = P.headline || "";
-    $("heroName").textContent = P.fullName || "";
+    /* Split an honorific prefix (e.g. "Prof. Dr.") from the name for styling */
+    var full = P.fullName || "";
+    var m = full.match(/^((?:(?:Prof|Dr|Engr|Mr|Ms|Mrs)\.?\s+)+)(.*)$/i);
+    $("heroName").innerHTML = m
+      ? '<span class="hero__prefix">' + esc(m[1].trim()) + '</span><span class="hero__fullname">' + esc(m[2]) + "</span>"
+      : '<span class="hero__fullname">' + esc(full) + "</span>";
     var parts = [P.department, P.institution, P.location].filter(function (x) { return !isBlank(x); });
     $("heroRole").innerHTML = "<strong>" + esc(P.designation || "") + "</strong>" + (parts.length ? "<br>" + esc(parts.join(", ")) : "");
     $("heroIntro").textContent = P.introduction || "";
@@ -110,6 +115,50 @@
     });
     renderSocial($("heroSocial"));
     $("navBrand").textContent = P.shortName || P.fullName || "";
+  }
+
+  /* ---------- HERO: rotating research areas ---------- */
+  function renderRotator() {
+    var el = $("heroRotator");
+    var items = RES.map(function (a) { return a.title; }).filter(function (t) { return !isBlank(t); });
+    if (!el || !items.length) { if (el) el.hidden = true; return; }
+    el.innerHTML = '<span class="hero__rotator-label">Research in</span> <span class="hero__rotator-word" id="heroRotWord">' + esc(items[0]) + "</span>";
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || items.length < 2) return;
+    var i = 0, word = $("heroRotWord");
+    setInterval(function () {
+      word.classList.add("is-out");
+      setTimeout(function () {
+        i = (i + 1) % items.length;
+        word.textContent = items[i];
+        word.classList.remove("is-out");
+      }, 350);
+    }, 3200);
+  }
+
+  /* ---------- HERO: metric tiles with count-up ---------- */
+  function renderHeroStats() {
+    var el = $("heroStats");
+    var S = STATS || {};
+    var tiles = [["Publications", S.totalPublications], ["Citations", S.totalCitations], ["h-index", S.hIndex], ["i10-index", S.i10Index]]
+      .filter(function (t) { return typeof t[1] === "number" && isFinite(t[1]); });
+    if (!tiles.length) { el.hidden = true; return; }
+    el.innerHTML = tiles.map(function (t) {
+      return '<li class="hero-stat"><span class="hero-stat__num" data-count="' + t[1] + '">' + t[1].toLocaleString("en-US") + '</span><span class="hero-stat__label">' + esc(t[0]) + "</span></li>";
+    }).join("");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    Array.prototype.forEach.call(el.querySelectorAll("[data-count]"), function (n) {
+      var target = +n.getAttribute("data-count"), start = null, dur = 1400;
+      n.textContent = "0";
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+        n.textContent = Math.round(target * e).toLocaleString("en-US");
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
   }
 
   /* ---------- ABOUT ---------- */
@@ -450,7 +499,7 @@
   }
 
   /* ---------- go ---------- */
-  renderHero(); renderAbout(); renderEducation(); renderResearch(); initPubs();
+  renderHero(); renderRotator(); renderHeroStats(); renderAbout(); renderEducation(); renderResearch(); initPubs();
   renderProjects(); renderExperience(); renderAwards(); renderCerts(); renderSkills();
   renderCV(); renderContact(); renderFooter();
   initNav(); initScroll(); initReveal();
