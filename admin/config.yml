@@ -69,11 +69,12 @@ collections:
                       - { name: label, label: Label, widget: string }
                       - { name: href, label: "Link (e.g. #publications)", widget: string }
                   - name: secondary
-                    label: "CV button (also used by the CV section)"
+                    label: "Second button (optional — leave both empty to hide)"
                     widget: object
+                    required: false
                     fields:
-                      - { name: label, label: Label, widget: string }
-                      - { name: href, label: "CV PDF — upload a new file or keep the current one", widget: file, allow_multiple: false }
+                      - { name: label, label: Label, widget: string, required: false }
+                      - { name: href, label: "Link", widget: string, required: false }
               - name: photo
                 label: Profile photo
                 widget: object
