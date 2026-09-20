@@ -242,3 +242,11 @@ In a terminal inside this folder, run `npx decap-server`, and in a second termin
 
 - The admin page loads Decap CMS from the unpkg.com CDN. The public website still loads nothing external except Google Fonts.
 - `/admin/` is hidden from search engines (`robots.txt` and a `noindex` tag). It is protected by the GitHub login, not by being hidden.
+
+## 14. The "Ask me" assistant
+
+The chat button in the bottom-right corner opens a site assistant that answers visitors' questions: research areas, papers on a topic or from a given year, citations and h-index, education, career, awards, contact details and more.
+
+- **It is free and private.** It runs entirely in the visitor's browser (`js/assistant.js`), makes no calls to any AI service, and costs nothing.
+- **It only knows what is on the site.** It reads the same `data/*.js` files as the page, so whatever you update in the admin panel, the assistant knows straight away. For anything not on the site, it points visitors to the contact email.
+- **Suggested questions:** to change the quick-question chips, edit the `SUGGEST` list near the bottom of `js/assistant.js`.

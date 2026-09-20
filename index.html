@@ -88,18 +88,25 @@
   <main id="main">
     <!-- HOME -->
     <section class="hero" id="home" aria-labelledby="heroName">
+      <div class="hero__bg" aria-hidden="true"><span class="hero__orb hero__orb--1"></span><span class="hero__orb hero__orb--2"></span><span class="hero__grid"></span></div>
       <div class="container hero__inner">
         <div class="hero__text">
           <p class="hero__eyebrow" id="heroEyebrow"></p>
           <h1 class="hero__name" id="heroName"></h1>
           <p class="hero__role" id="heroRole"></p>
+          <p class="hero__rotator" id="heroRotator" aria-live="off"></p>
           <p class="hero__intro" id="heroIntro"></p>
           <div class="hero__actions" id="heroActions"></div>
           <ul class="social" id="heroSocial" aria-label="Academic profiles"></ul>
         </div>
         <figure class="hero__portrait">
-          <img id="heroPhoto" src="assets/images/profile.jpg" alt="" width="267" height="285">
+          <div class="hero__ring">
+            <img id="heroPhoto" src="assets/images/profile.jpg" alt="" width="267" height="285">
+          </div>
         </figure>
+      </div>
+      <div class="container">
+        <ul class="hero__stats" id="heroStats" aria-label="Research metrics"></ul>
       </div>
     </section>
 
@@ -250,5 +257,6 @@
   <script src="data/skills.js"></script>
   <!-- Rendering -->
   <script src="js/script.js"></script>
+  <script src="js/assistant.js"></script>
 </body>
 </html>
