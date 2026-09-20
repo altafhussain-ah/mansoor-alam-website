@@ -1,0 +1,291 @@
+# =========================================================
+#  Admin panel configuration (Decap CMS)
+#  1. Replace YOUR-GITHUB-USERNAME/YOUR-REPO below.
+#  2. Follow README section 13 to connect GitHub login via Netlify.
+# =========================================================
+backend:
+  name: github
+  repo: altafhussain-ah/mansoor-alam-website
+  branch: main
+  commit_messages:
+    update: "Update {{collection}} “{{slug}}” via admin panel"
+  # If the site is NOT hosted on Netlify (e.g. GitHub Pages), keep a free
+  # Netlify site only for login and put its address here:
+  # site_domain: your-site-name.netlify.app
+
+# Lets you test the admin panel on your own computer with `npx decap-server`
+local_backend: true
+
+site_url: https://YOUR-DOMAIN.com          # ← replace
+display_url: https://YOUR-DOMAIN.com       # ← replace
+logo_url: ../assets/icons/favicon.svg
+
+# Uploaded photos and PDFs are stored here
+media_folder: assets/uploads
+public_folder: assets/uploads
+
+collections:
+  - name: content
+    label: Website content
+    format: jsdata
+    extension: js
+    editor:
+      preview: false
+    files:
+
+      # ---------------------------------------------------- PROFILE
+      - name: profile
+        label: "1 · Profile, About & Contact"
+        file: data/profile.js
+        fields:
+          - name: PROFILE
+            label: Profile
+            widget: object
+            collapsed: false
+            fields:
+              - { name: fullName, label: "Full name (shown in the hero)", widget: string }
+              - { name: shortName, label: "Short name (top bar)", widget: string }
+              - { name: credentials, label: "Qualifications (one line)", widget: string, required: false }
+              - { name: headline, label: "Research headline (small line above the name)", widget: string }
+              - { name: designation, label: "Job title", widget: string }
+              - { name: department, label: "Department / Faculty", widget: string, required: false }
+              - { name: institution, label: "Institution", widget: string }
+              - { name: location, label: "Location", widget: string }
+              - { name: languages, label: "Languages", widget: string, required: false }
+              - { name: introduction, label: "Hero introduction paragraph", widget: text }
+              - name: biography
+                label: "About — biography paragraphs"
+                widget: list
+                field: { name: paragraph, label: Paragraph, widget: text }
+              - name: heroButtons
+                label: Hero buttons
+                widget: object
+                collapsed: true
+                fields:
+                  - name: primary
+                    label: Primary (maroon) button
+                    widget: object
+                    fields:
+                      - { name: label, label: Label, widget: string }
+                      - { name: href, label: "Link (e.g. #publications)", widget: string }
+                  - name: secondary
+                    label: "CV button (also used by the CV section)"
+                    widget: object
+                    fields:
+                      - { name: label, label: Label, widget: string }
+                      - { name: href, label: "CV PDF — upload a new file or keep the current one", widget: file, allow_multiple: false }
+              - name: photo
+                label: Profile photo
+                widget: object
+                fields:
+                  - { name: src, label: "Photo (portrait, about 600 × 640 px)", widget: image, allow_multiple: false }
+                  - { name: alt, label: "Photo description (for screen readers)", widget: string }
+                  - { name: isPlaceholder, label: "Is placeholder?", widget: boolean, default: false, required: false }
+              - name: contact
+                label: Contact details
+                widget: object
+                fields:
+                  - { name: email, label: Public email, widget: string }
+                  - { name: institutionAddress, label: Address, widget: string, required: false }
+                  - { name: office, label: Office, widget: string, required: false }
+              - name: socialLinks
+                label: "Profile links (leave empty to hide)"
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: googleScholar, label: Google Scholar, widget: string, required: false }
+                  - { name: orcid, label: ORCID, widget: string, required: false }
+                  - { name: scopus, label: Scopus, widget: string, required: false }
+                  - { name: researchGate, label: ResearchGate, widget: string, required: false }
+                  - { name: dblp, label: dblp, widget: string, required: false }
+                  - { name: universityProfile, label: University profile, widget: string, required: false }
+                  - { name: academiaEdu, label: Academia.edu, widget: string, required: false }
+                  - { name: linkedin, label: LinkedIn, widget: string, required: false }
+                  - { name: github, label: GitHub, widget: string, required: false }
+              - name: seo
+                label: "Search engine settings"
+                widget: object
+                collapsed: true
+                fields:
+                  - { name: title, label: Page title, widget: string }
+                  - { name: description, label: Meta description, widget: text }
+                  - { name: keywords, label: Keywords, widget: string, required: false }
+                  - { name: ogImage, label: Social share image path, widget: string, required: false }
+                  - { name: siteUrl, label: Site URL, widget: string, required: false }
+
+      # ---------------------------------------------------- EDUCATION
+      - name: education
+        label: "2 · Academic Profile (Education)"
+        file: data/education.js
+        fields:
+          - name: EDUCATION
+            label: Degrees (newest first)
+            label_singular: Degree
+            widget: list
+            summary: "{{fields.year}} — {{fields.degree}}"
+            fields:
+              - { name: degree, label: Degree, widget: string }
+              - { name: institution, label: Institution, widget: string }
+              - { name: year, label: Year, widget: string, required: false }
+              - { name: specialization, label: "Specialisation / thesis", widget: text, required: false }
+              - { name: link, label: "Thesis link (optional)", widget: string, required: false }
+
+      # ---------------------------------------------------- RESEARCH
+      - name: research
+        label: "3 · Research Areas"
+        file: data/research.js
+        fields:
+          - name: RESEARCH_AREAS
+            label: Research areas
+            label_singular: Research area
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: icon, label: Icon, widget: select, options: [brain, code, eye, chip, compass] }
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - name: keywords
+                label: Keywords
+                widget: list
+                field: { name: keyword, label: Keyword, widget: string }
+              - name: relatedPublicationIds
+                label: "Related publication ids (e.g. j12) — drives the bar chart"
+                widget: list
+                field: { name: id, label: Publication id, widget: string }
+
+      # ---------------------------------------------------- PUBLICATIONS
+      - name: publications
+        label: "4 · Publications"
+        file: data/publications.js
+        fields:
+          - name: PUBLICATIONS
+            label: Publications
+            label_singular: Publication
+            widget: list
+            add_to_top: true
+            summary: "{{fields.id}} · {{fields.year}} — {{fields.title}}"
+            fields:
+              - { name: id, label: "Id (unique: j# journal, c# conference, o# other)", widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: authors, label: Authors, widget: text }
+              - { name: venue, label: "Journal / conference, volume, pages", widget: string }
+              - { name: year, label: Year, widget: number, value_type: int, required: false }
+              - { name: type, label: Type, widget: select, options: [journal, conference, other], default: journal }
+              - { name: doi, label: "DOI (e.g. 10.1109/ACCESS.2024.1234567)", widget: string, required: false }
+              - { name: link, label: "Article link (optional)", widget: string, required: false }
+              - { name: indexing, label: "Indexing note (e.g. Q1 · IF 3.9)", widget: string, required: false }
+              - { name: notice, label: "Notice — red tag (e.g. Retracted by the publisher)", widget: string, required: false }
+              - { name: abstract, label: "Abstract (optional)", widget: text, required: false }
+          - name: PUBLICATION_STATS
+            label: Publication statistics (top of the section)
+            widget: object
+            fields:
+              - { name: totalPublications, label: Total publications, widget: number, value_type: int, required: false }
+              - { name: totalJournalArticles, label: Journal articles, widget: number, value_type: int, required: false }
+              - { name: totalConferencePapers, label: Conference papers, widget: number, value_type: int, required: false }
+              - { name: totalCitations, label: Citations, widget: number, value_type: int, required: false }
+              - { name: hIndex, label: h-index, widget: number, value_type: int, required: false }
+              - { name: i10Index, label: i10-index, widget: number, value_type: int, required: false }
+              - { name: asOf, label: "As of (e.g. January 2027)", widget: string, required: false }
+              - { name: sourceNote, label: Source note, widget: text, required: false }
+
+      # ---------------------------------------------------- PROJECTS
+      - name: projects
+        label: "5 · Projects & Funding"
+        file: data/projects.js
+        fields:
+          - name: PROJECTS
+            label: Projects
+            label_singular: Project
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - { name: role, label: Role, widget: string, required: false }
+              - { name: fundingOrganization, label: Funding, widget: string, required: false }
+              - { name: collaborators, label: Collaborators, widget: string, required: false }
+              - { name: duration, label: Duration, widget: string, required: false }
+              - { name: researchArea, label: Research area, widget: string, required: false }
+              - { name: status, label: "Status (e.g. Ongoing, Completed)", widget: string, required: false }
+              - name: relatedOutputs
+                label: Related publication ids
+                widget: list
+                required: false
+                field: { name: id, label: Publication id, widget: string }
+
+      # ---------------------------------------------------- EXPERIENCE
+      - name: experience
+        label: "6 · Experience"
+        file: data/experience.js
+        fields:
+          - name: EXPERIENCE
+            label: Positions (newest first)
+            label_singular: Position
+            widget: list
+            add_to_top: true
+            summary: "{{fields.startDate}} – {{fields.endDate}} · {{fields.title}}, {{fields.organization}}"
+            fields:
+              - { name: current, label: "Current position? (tick only ONE)", widget: boolean, default: false, required: false }
+              - { name: title, label: Title, widget: string }
+              - { name: organization, label: Organisation, widget: string }
+              - { name: department, label: Department, widget: string, required: false }
+              - { name: location, label: Location, widget: string, required: false }
+              - { name: startDate, label: "Start (e.g. Sept 2021)", widget: string, required: false }
+              - { name: endDate, label: "End (e.g. Present)", widget: string, required: false }
+              - name: responsibilities
+                label: Responsibilities / roles
+                widget: list
+                required: false
+                field: { name: item, label: Item, widget: string }
+              - name: achievements
+                label: Achievements
+                widget: list
+                required: false
+                field: { name: item, label: Item, widget: string }
+
+      # ---------------------------------------------------- AWARDS
+      - name: awards
+        label: "7 · Awards & Achievements"
+        file: data/awards.js
+        fields:
+          - name: AWARDS
+            label: Awards
+            label_singular: Award
+            widget: list
+            add_to_top: true
+            summary: "{{fields.year}} — {{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: organization, label: Awarded by, widget: string, required: false }
+              - { name: year, label: "Year (e.g. 2012 or 2010 – 2011)", widget: string, required: false }
+              - { name: description, label: Description, widget: text, required: false }
+
+      # ---------------------------------------------------- CERTIFICATIONS
+      - name: certifications
+        label: "8 · Certifications & Training"
+        file: data/certifications.js
+        fields:
+          - name: CERTIFICATIONS
+            label: Certifications
+            label_singular: Certification
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: issuer, label: Issued by, widget: string, required: false }
+
+      # ---------------------------------------------------- SKILLS
+      - name: skills
+        label: "9 · Skills & Expertise"
+        file: data/skills.js
+        fields:
+          - name: SKILLS
+            label: Skills
+            widget: object
+            collapsed: false
+            fields:
+              - { name: research, label: Research, widget: list, field: { name: item, label: Skill, widget: string } }
+              - { name: technical, label: Technical, widget: list, field: { name: item, label: Skill, widget: string } }
+              - { name: teaching, label: "Teaching & Supervision", widget: list, field: { name: item, label: Skill, widget: string } }
+              - { name: professional, label: Professional, widget: list, field: { name: item, label: Skill, widget: string } }
