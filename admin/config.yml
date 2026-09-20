@@ -1,6 +1,6 @@
 # =========================================================
 #  Admin panel configuration (Decap CMS)
-#  1. Replace YOUR-GITHUB-USERNAME/YOUR-REPO below.
+#  1. repo: points at the GitHub repository holding this site.
 #  2. Follow README section 13 to connect GitHub login via Netlify.
 # =========================================================
 backend:
@@ -16,8 +16,8 @@ backend:
 # Lets you test the admin panel on your own computer with `npx decap-server`
 local_backend: true
 
-site_url: https://YOUR-DOMAIN.com          # ← replace
-display_url: https://YOUR-DOMAIN.com       # ← replace
+site_url: https://prof-mansoor-alam.netlify.app
+display_url: https://prof-mansoor-alam.netlify.app
 logo_url: ../assets/icons/favicon.svg
 
 # Uploaded photos and PDFs are stored here
