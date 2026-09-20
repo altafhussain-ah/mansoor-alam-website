@@ -1,0 +1,49 @@
+/* =========================================================
+   EDUCATION — newest first. "link" is optional ("" hides it).
+   This file is edited by the admin panel (/admin) — you can also
+   edit it by hand; keep it valid JSON after the "=" sign.
+   ========================================================= */
+const EDUCATION = [
+  {
+    "degree": "Post-Doctorate",
+    "institution": "Universiti Kuala Lumpur, Kuala Lumpur, Malaysia",
+    "year": "[Information to be added]",
+    "specialization": "Research: Machine Learning Approaches for Efficient Prediction and Decision Making",
+    "link": ""
+  },
+  {
+    "degree": "Ph.D. (Electrical and Electronics Engineering) — Dual Ph.D.",
+    "institution": "Universiti Kuala Lumpur, Kuala Lumpur, Malaysia",
+    "year": "[Information to be added]",
+    "specialization": "Thesis: Error corrected location determination in an outdoor wireless environment by using estimation, filtering, prediction and fusion techniques — a Wi-Fi application using terrain-based knowledge",
+    "link": ""
+  },
+  {
+    "degree": "Ph.D. (Computer Science)",
+    "institution": "Université de La Rochelle, France — Laboratoire Informatique, Image et Interaction (L3i)",
+    "year": "2010",
+    "specialization": "Awarded with the distinction Très Honorable",
+    "link": "https://tel.archives-ouvertes.fr/file/index/docid/815919/filename/2011Alam24348.pdf"
+  },
+  {
+    "degree": "MS (Information Systems)",
+    "institution": "University of Reading, England",
+    "year": "2002",
+    "specialization": "Thesis: Platform for Interactive Network Games · 1st Division · Scholarship: ENST & French Telecom",
+    "link": ""
+  },
+  {
+    "degree": "M.Sc (Computer Science)",
+    "institution": "Preston University, Pakistan",
+    "year": "1998",
+    "specialization": "Second position in M.Sc Computer Science",
+    "link": ""
+  },
+  {
+    "degree": "B.Sc (Computer Science)",
+    "institution": "University of the Punjab, Pakistan",
+    "year": "1995",
+    "specialization": "",
+    "link": ""
+  }
+];
