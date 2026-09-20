@@ -40,7 +40,7 @@ const PROFILE = {
     "description": "Academic portfolio of Prof. Dr. Muhammad Mansoor Alam, Professor of Computer Science at Riphah International University, Islamabad — machine learning, AI, decision support systems, computer vision, networks and IoT.",
     "keywords": "Muhammad Mansoor Alam, Riphah International University, machine learning, artificial intelligence, decision support systems, computer vision, IoT, software-defined networking, professor, Islamabad",
     "ogImage": "assets/images/profile.jpg",
-    "siteUrl": "https://YOUR-DOMAIN.com/"
+    "siteUrl": "https://prof-mansoor-alam.netlify.app/"
   },
   "contact": {
     "email": "m.mansoor@riphah.edu.pk",
