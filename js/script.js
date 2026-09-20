@@ -158,6 +158,8 @@
         if (p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
+      /* safety net: if animation frames are paused (e.g. background tab), show the final value */
+      setTimeout(function () { n.textContent = target.toLocaleString("en-US"); }, dur + 300);
     });
   }
 
