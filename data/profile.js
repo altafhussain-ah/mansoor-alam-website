@@ -26,8 +26,8 @@ const PROFILE = {
       "href": "#publications"
     },
     "secondary": {
-      "label": "Download CV",
-      "href": "assets/cv/Muhammad-Mansoor-Alam-CV.pdf"
+      "label": "",
+      "href": ""
     }
   },
   "photo": {
