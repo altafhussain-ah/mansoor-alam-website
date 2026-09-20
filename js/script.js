@@ -338,6 +338,7 @@
 
   /* ---------- CV ---------- */
   function renderCV() {
+    if (!$("cvCard")) return;   /* CV section removed from the page */
     var href = (P.heroButtons && P.heroButtons.secondary && P.heroButtons.secondary.href) || "";
     if (isBlank(href)) { $("cvCard").innerHTML = "<p>" + PLACEHOLDER + "</p>"; return; }
     $("cvCard").innerHTML =
