@@ -1,7 +1,7 @@
 import { certifications } from "@/lib/content";
 import { Icon } from "./Icon";
 import { EmptyNote, Field } from "./Placeholder";
-import { Reveal } from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 import { Section } from "./Section";
 
 export function CertificationsSection() {
@@ -10,12 +10,13 @@ export function CertificationsSection() {
       {certifications.length === 0 ? (
         <EmptyNote />
       ) : (
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup as="ul" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {certifications.map((cert, i) => (
-            <Reveal
+            <StaggerItem
               as="li"
               key={`${cert.title}-${i}`}
-              className="flex items-start gap-4 rounded-[18px] border border-line bg-mist-50 p-5 transition-[transform,box-shadow] hover:-translate-y-1 hover:shadow-lift"
+              whileHover={{ y: -4 }}
+              className="flex items-start gap-4 rounded-[18px] border border-line bg-mist-50 p-5 transition-shadow hover:shadow-lift"
             >
               <span className="flex size-[42px] shrink-0 items-center justify-center rounded-full bg-accent text-white">
                 <Icon name="cert" className="size-5" />
@@ -28,9 +29,9 @@ export function CertificationsSection() {
                   <Field value={cert.issuer} />
                 </p>
               </div>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerGroup>
       )}
     </Section>
   );

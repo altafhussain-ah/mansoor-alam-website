@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
+import { m } from "motion/react";
+import type { Variants } from "motion/react";
 import { GREETING, HONORIFIC, SUGGESTIONS, answer } from "@/lib/assistant";
 import { assetPath, profile } from "@/lib/content";
 import { requestPublicationSearch } from "@/lib/pub-search";
@@ -15,6 +17,29 @@ interface Message {
 }
 
 let nextId = 0;
+
+/**
+ * The panel stays mounted so the conversation survives being closed, so this
+ * animates in place rather than through AnimatePresence. `visibility` is
+ * deferred to `transitionEnd` so the panel is not painted while closed but
+ * still gets to play its exit.
+ */
+const PANEL: Variants = {
+  open: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    visibility: "visible",
+    transition: { type: "spring", stiffness: 300, damping: 26 },
+  },
+  closed: {
+    opacity: 0,
+    scale: 0.97,
+    y: 16,
+    transition: { duration: 0.18, ease: [0.4, 0, 1, 1] },
+    transitionEnd: { visibility: "hidden" },
+  },
+};
 
 /** Short pause before the reply appears, scaled to question length. */
 function thinkingDelay(text: string): number {
@@ -128,28 +153,36 @@ export function Assistant() {
 
   return (
     <div className="no-print">
-      <button
+      <m.button
         ref={launcherRef}
         type="button"
         onClick={toggle}
         aria-expanded={open}
         aria-controls="assistant-panel"
-        className={`fixed right-[18px] bottom-5 z-[950] inline-flex h-14 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-accent px-0 font-sans text-[0.98rem] font-semibold text-white transition-transform hover:-translate-y-0.5 hover:scale-[1.03] min-[521px]:h-[54px] min-[521px]:pr-5 min-[521px]:pl-4 ${
+        whileHover={{ scale: 1.06, y: -2 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 380, damping: 24 }}
+        className={`fixed right-[18px] bottom-5 z-[950] inline-flex h-14 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-accent px-0 font-sans text-[0.98rem] font-semibold text-white min-[521px]:h-[54px] min-[521px]:pr-5 min-[521px]:pl-4 ${
           open ? "shadow-glow" : "animate-launcher"
         } w-14 min-[521px]:w-auto`}
       >
         <Icon name="chat" className="size-[22px] shrink-0" strokeWidth={1.9} />
         <span className="hidden min-[521px]:inline">Ask me</span>
-      </button>
+      </m.button>
 
-      <section
+      <m.section
         id="assistant-panel"
         role="dialog"
         aria-modal="false"
         aria-labelledby="assistant-title"
-        hidden={!open}
-        className={`fixed right-[18px] bottom-[86px] z-[960] flex h-[min(600px,calc(100vh-120px))] w-[min(390px,calc(100vw-32px))] origin-bottom-right flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_30px_80px_-20px_rgba(16,21,28,0.55),0_0_0_1px_rgba(16,21,28,0.06)] transition-[opacity,transform] duration-200 max-[520px]:inset-x-2 max-[520px]:bottom-[84px] max-[520px]:h-[calc(100dvh-104px)] max-[520px]:w-auto ${
-          open ? "scale-100 opacity-100" : "pointer-events-none translate-y-4 scale-[0.98] opacity-0"
+        // inert, not hidden: it keeps the closed panel out of the tab order and
+        // the accessibility tree without display:none cutting off the exit.
+        inert={!open}
+        initial={false}
+        animate={open ? "open" : "closed"}
+        variants={PANEL}
+        className={`fixed right-[18px] bottom-[86px] z-[960] flex h-[min(600px,calc(100vh-120px))] w-[min(390px,calc(100vw-32px))] origin-bottom-right flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_30px_80px_-20px_rgba(16,21,28,0.55),0_0_0_1px_rgba(16,21,28,0.06)] max-[520px]:inset-x-2 max-[520px]:bottom-[84px] max-[520px]:h-[calc(100dvh-104px)] max-[520px]:w-auto ${
+          open ? "" : "pointer-events-none"
         }`}
       >
         <header className="relative flex items-center gap-3 bg-dark-wash py-4 pr-4 pl-[18px] text-white after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:bg-accent after:content-['']">
@@ -266,7 +299,7 @@ export function Assistant() {
         <p className="m-0 bg-[#f4f5f7] px-3.5 pb-2.5 text-center text-[0.72rem] text-ink-500">
           Answers come only from the content on this page.
         </p>
-      </section>
+      </m.section>
     </div>
   );
 }

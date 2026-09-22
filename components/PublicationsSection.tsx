@@ -1,6 +1,7 @@
 "use client";
 
-import { Fragment, useDeferredValue, useEffect, useMemo, useState } from "react";
+import { Fragment, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { m } from "motion/react";
 import { onPublicationSearch } from "@/lib/pub-search";
 import {
   isBlank,
@@ -14,6 +15,7 @@ import { PLACEHOLDER } from "@/lib/types";
 import { Badge } from "./Badge";
 import { Field, PlaceholderTag } from "./Placeholder";
 import { Reveal } from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 import { Section } from "./Section";
 
 const PAGE_SIZE = 15;
@@ -57,10 +59,11 @@ function StatTiles() {
   if (publicationStats.i10Index != null) tiles.push(["i10-index", publicationStats.i10Index]);
 
   return (
-    <Reveal className="grid grid-cols-2 gap-3 cards:grid-cols-3 lg:grid-cols-6">
+    <StaggerGroup stagger={0.06} className="grid grid-cols-2 gap-3 cards:grid-cols-3 lg:grid-cols-6">
       {tiles.map(([label, value]) => (
-        <div
+        <StaggerItem
           key={label}
+          variant="scaleIn"
           className="rounded-2xl border border-line bg-white p-5 px-4 text-center shadow-card"
         >
           {typeof value === "number" ? (
@@ -75,9 +78,9 @@ function StatTiles() {
           <div className="mt-1.5 text-[0.78rem] font-semibold tracking-[0.1em] text-ink-500 uppercase">
             {label}
           </div>
-        </div>
+        </StaggerItem>
       ))}
-    </Reveal>
+    </StaggerGroup>
   );
 }
 
@@ -187,6 +190,14 @@ export function PublicationsSection() {
     });
   }, [type, deferredQuery]);
 
+  // The crossfade is for filter changes only. Letting it run on the very
+  // first render would ship opacity:0.35 in the static HTML, leaving the list
+  // washed out for anyone whose JavaScript never arrives.
+  const firstRender = useRef(true);
+  useEffect(() => {
+    firstRender.current = false;
+  }, []);
+
   const limited = !expanded && !deferredQuery.trim() && matched.length > PAGE_SIZE;
   const shown = limited ? matched.slice(0, PAGE_SIZE) : matched;
 
@@ -246,7 +257,12 @@ export function PublicationsSection() {
         {matched.length === 1 ? "" : "s"}.
       </p>
 
-      <ol>
+      <m.ol
+        key={type}
+        initial={firstRender.current ? false : { opacity: 0.35 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.25, ease: [0.22, 0.61, 0.36, 1] }}
+      >
         {shown.length > 0 ? (
           shown.map((item) => <PublicationItem key={item.id} item={item} />)
         ) : (
@@ -254,7 +270,7 @@ export function PublicationsSection() {
             {publications.length > 0 ? "No publications match your search." : <PlaceholderTag />}
           </li>
         )}
-      </ol>
+      </m.ol>
 
       {limited && (
         <div className="mt-6 text-center">

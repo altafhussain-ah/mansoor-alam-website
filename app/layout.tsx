@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
+import { CursorRing } from "@/components/motion/CursorRing";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import { education, isBlank, profile, researchAreas, siteUrl } from "@/lib/content";
 import "./globals.css";
 
@@ -94,7 +96,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        {children}
+        <MotionProvider>
+          {children}
+          <CursorRing />
+        </MotionProvider>
         <script
           type="application/ld+json"
           // Generated above from our own content; no external input.

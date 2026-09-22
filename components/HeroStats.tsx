@@ -42,9 +42,12 @@ export function HeroStats({ tiles }: { tiles: StatTile[] }) {
       className="mt-10 grid grid-cols-2 gap-3 cards:grid-cols-4 cards:gap-4"
       aria-label="Research metrics"
     >
-      {tiles.map((tile) => (
+      {tiles.map((tile, index) => (
         <li
           key={tile.label}
+          data-enter
+          // Tiles arrive after the hero copy has settled, one beat apart.
+          style={{ animationDelay: `${0.6 + index * 0.08}s` }}
           className="glass relative overflow-hidden rounded-[18px] px-[18px] pt-[18px] pb-4 transition-[transform,border-color] before:absolute before:inset-y-0 before:left-0 before:w-[3px] before:bg-accent before:content-[''] hover:-translate-y-1 hover:border-blush-400/50"
         >
           <span className="block font-serif text-[clamp(1.6rem,3.2vw,2.3rem)] leading-tight font-bold text-white tabular-nums">

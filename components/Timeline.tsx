@@ -1,12 +1,16 @@
 import type { ReactNode } from "react";
-import { Reveal } from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
 /** Vertical rule with dots, shared by Education and Experience. */
 export function Timeline({ children }: { children: ReactNode }) {
   return (
-    <ol className="relative pl-7 before:absolute before:top-1.5 before:bottom-1.5 before:left-[7px] before:w-[3px] before:bg-[linear-gradient(var(--color-maroon-500),var(--color-blush-400),rgba(240,138,154,0.15))] before:content-['']">
+    <StaggerGroup
+      as="ol"
+      stagger={0.09}
+      className="relative pl-7 before:absolute before:top-1.5 before:bottom-1.5 before:left-[7px] before:w-[3px] before:bg-[linear-gradient(var(--color-maroon-500),var(--color-blush-400),rgba(240,138,154,0.15))] before:content-['']"
+    >
       {children}
-    </ol>
+    </StaggerGroup>
   );
 }
 
@@ -18,8 +22,11 @@ export function TimelineItem({
   children: ReactNode;
 }) {
   return (
-    <Reveal
+    <StaggerItem
       as="li"
+      // Entries slide off the rule rather than up from below, so the eye
+      // follows the timeline instead of crossing it.
+      variant="slideRight"
       className={`relative mb-[22px] before:absolute before:top-6 before:-left-[27px] before:size-3.5 before:rounded-full before:border-[3px] before:border-maroon-500 before:content-[''] ${
         current
           ? "before:border-white before:bg-accent before:shadow-[0_0_0_4px_rgba(224,86,107,0.35)]"
@@ -33,7 +40,7 @@ export function TimelineItem({
       >
         {children}
       </div>
-    </Reveal>
+    </StaggerItem>
   );
 }
 

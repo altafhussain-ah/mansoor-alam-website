@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Reveal } from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 
 export function Container({
   children,
@@ -31,17 +31,22 @@ export function Section({ id, tint = false, kicker, title, children }: SectionPr
       className={`py-18 wide:py-24 ${tint ? "bg-section-tint" : "bg-white"}`}
     >
       <Container>
-        <Reveal as="header" className="mb-10">
-          <p className="mb-2 inline-block rounded-full bg-maroon-500/8 px-3 py-[5px] text-[0.78rem] font-bold tracking-[0.14em] text-maroon-600 uppercase">
-            {kicker}
-          </p>
-          <h2
-            id={headingId}
-            className="relative pb-4 text-[clamp(2rem,4vw,2.8rem)] after:absolute after:bottom-0 after:left-0 after:h-1 after:w-18 after:rounded-sm after:bg-accent after:content-['']"
+        <StaggerGroup as="header" stagger={0.1} className="mb-10">
+          <StaggerItem
+            as="p"
+            className="mb-2 inline-block rounded-full bg-maroon-500/8 px-3 py-[5px] text-[0.78rem] font-bold tracking-[0.14em] text-maroon-600 uppercase"
           >
-            {title}
-          </h2>
-        </Reveal>
+            {kicker}
+          </StaggerItem>
+          <StaggerItem>
+            <h2
+              id={headingId}
+              className="relative pb-4 text-[clamp(2rem,4vw,2.8rem)] after:absolute after:bottom-0 after:left-0 after:h-1 after:w-18 after:rounded-sm after:bg-accent after:content-['']"
+            >
+              {title}
+            </h2>
+          </StaggerItem>
+        </StaggerGroup>
         {children}
       </Container>
     </section>

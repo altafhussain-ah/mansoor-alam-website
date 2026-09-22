@@ -1,7 +1,7 @@
 import { compact, skills } from "@/lib/content";
 import type { Skills } from "@/lib/types";
 import { EmptyNote, Field } from "./Placeholder";
-import { Reveal } from "./Reveal";
+import { StaggerGroup, StaggerItem } from "./motion/Stagger";
 import { Section } from "./Section";
 
 const GROUPS: ReadonlyArray<[keyof Skills, string]> = [
@@ -14,11 +14,11 @@ const GROUPS: ReadonlyArray<[keyof Skills, string]> = [
 export function SkillsSection() {
   return (
     <Section id="skills" tint kicker="Capabilities" title="Skills & Expertise">
-      <div className="grid grid-cols-1 gap-5.5 cards:grid-cols-2 quad:grid-cols-4">
+      <StaggerGroup className="grid grid-cols-1 gap-5.5 cards:grid-cols-2 quad:grid-cols-4">
         {GROUPS.map(([key, label]) => {
           const items = compact(skills[key]);
           return (
-            <Reveal
+            <StaggerItem
               key={key}
               className="relative overflow-hidden rounded-[18px] border border-line bg-white p-6 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-accent before:content-['']"
             >
@@ -40,10 +40,10 @@ export function SkillsSection() {
                   ))}
                 </ul>
               )}
-            </Reveal>
+            </StaggerItem>
           );
         })}
-      </div>
+      </StaggerGroup>
     </Section>
   );
 }
