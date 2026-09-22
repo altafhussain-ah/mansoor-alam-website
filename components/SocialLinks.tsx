@@ -13,6 +13,7 @@ const SOCIAL: ReadonlyArray<[SocialKey, string, IconName]> = [
   ["academiaEdu", "Academia.edu", "link"],
   ["linkedin", "LinkedIn", "linkedin"],
   ["github", "GitHub", "github"],
+  ["whatsapp", "WhatsApp", "whatsapp"],
 ];
 
 /** Links with an empty URL in profile.json are hidden entirely. */

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { m, useScroll, useSpring } from "motion/react";
 import type { Variants } from "motion/react";
 import { profile } from "@/lib/content";
+import { HeaderSocial } from "./HeaderSocial";
 import { Container } from "./Section";
 
 const NAV_ITEMS = [
@@ -199,7 +200,7 @@ export function SiteHeader() {
             // Desktop keeps the list permanently open; only the mobile sheet toggles.
             animate={isMobile ? (open ? "open" : "closed") : "open"}
             variants={MENU}
-            className={`fixed inset-x-0 top-19 max-h-[calc(100vh-76px)] flex-col items-stretch gap-0 overflow-y-auto border-b border-maroon-500/30 bg-steel-950 px-4 pt-2 pb-5 transition-all duration-300 nav:relative nav:max-h-none nav:flex-row nav:items-center nav:gap-0.5 nav:overflow-visible nav:border-0 nav:bg-transparent nav:p-0 ${
+            className={`fixed inset-x-0 top-19 max-h-[calc(100vh-76px)] flex-col items-stretch gap-0 overflow-y-auto border-b border-maroon-500/30 bg-steel-950 px-4 pt-2 pb-5 transition-all duration-300 nav:relative nav:inset-auto nav:max-h-none nav:flex-row nav:items-center nav:gap-0.5 nav:overflow-visible nav:border-0 nav:bg-transparent nav:p-0 ${
               open
                 ? "visible flex translate-y-0 opacity-100"
                 : "invisible flex -translate-y-2 opacity-0 nav:visible nav:translate-y-0 nav:opacity-100"
@@ -232,7 +233,13 @@ export function SiteHeader() {
                 </m.li>
               );
             })}
+
+            <li>
+              <HeaderSocial inSheet />
+            </li>
           </m.ul>
+
+          <HeaderSocial />
         </Container>
       </header>
     </>

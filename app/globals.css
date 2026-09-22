@@ -58,6 +58,7 @@
   --animate-spin-slow: spin 40s linear infinite;
   --animate-launcher: launcher-pulse 3s ease-in-out infinite;
   --animate-msg-in: msg-in 0.22s ease;
+  --animate-caret: caret-blink 1s step-end infinite;
 }
 
 /* Gradients are plain variables: they are painted, not utility-generated. */
@@ -111,6 +112,15 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }
 @keyframes typing-dot {

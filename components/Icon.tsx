@@ -22,6 +22,8 @@ const PATHS = {
   send: "M4 12l16-8-6 16-2.5-6.5L4 12z",
   close: "M6 6l12 12M18 6L6 18",
   lock: "M8 11V7a4 4 0 0 1 8 0v4",
+  whatsapp:
+    "M20.5 3.5A11.9 11.9 0 0 0 3.6 19.6L2 22l2.5-1.6A11.9 11.9 0 1 0 20.5 3.5z",
   chat: "M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.3-.6L3 21l1.8-5A8.3 8.3 0 0 1 4 11.5a8.4 8.4 0 0 1 9-8.4 8.4 8.4 0 0 1 8 8.4z",
 } as const;
 
@@ -37,6 +39,9 @@ const EXTRAS: Partial<Record<IconName, React.ReactNode>> = {
   linkedin: <rect x="3" y="3" width="18" height="18" rx="2" />,
   mail: <rect x="3" y="5" width="18" height="14" rx="2" />,
   lock: <rect x="5" y="11" width="14" height="10" rx="2" />,
+  whatsapp: (
+    <path d="M8.6 7.6c.3-.6 1.2-.6 1.5 0l.8 1.6c.2.4.1.9-.2 1.2l-.5.5c.6 1.3 1.5 2.2 2.8 2.8l.5-.5c.3-.3.8-.4 1.2-.2l1.6.8c.6.3.6 1.2 0 1.5l-.7.4a3 3 0 0 1-2.8 0 11 11 0 0 1-4.9-4.9 3 3 0 0 1 0-2.8z" />
+  ),
 };
 
 /** Glyphs whose main outline differs from the PATHS entry. */

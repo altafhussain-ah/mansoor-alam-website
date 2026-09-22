@@ -102,6 +102,7 @@ collections:
               - { name: academiaEdu, label: Academia.edu, widget: string, required: false }
               - { name: linkedin, label: LinkedIn, widget: string, required: false }
               - { name: github, label: GitHub, widget: string, required: false }
+              - { name: whatsapp, label: "WhatsApp (https://wa.me/92XXXXXXXXXX)", widget: string, required: false }
           - name: seo
             label: "Search engine settings"
             widget: object

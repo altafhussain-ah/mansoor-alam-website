@@ -15,7 +15,8 @@ export type SocialKey =
   | "universityProfile"
   | "academiaEdu"
   | "linkedin"
-  | "github";
+  | "github"
+  | "whatsapp";
 
 export interface HeroButton {
   label: string;
