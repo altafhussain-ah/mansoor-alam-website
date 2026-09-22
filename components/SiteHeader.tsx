@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { m, useScroll, useSpring } from "motion/react";
 import type { Variants } from "motion/react";
 import { profile } from "@/lib/content";
-import { HeaderSocial } from "./HeaderSocial";
 import { Container } from "./Section";
 
 const NAV_ITEMS = [
@@ -234,12 +233,7 @@ export function SiteHeader() {
               );
             })}
 
-            <li>
-              <HeaderSocial inSheet />
-            </li>
           </m.ul>
-
-          <HeaderSocial />
         </Container>
       </header>
     </>

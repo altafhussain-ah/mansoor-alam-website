@@ -13,6 +13,7 @@ import { ResearchSection } from "@/components/ResearchSection";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SkillsSection } from "@/components/SkillsSection";
+import { SocialRail } from "@/components/SocialRail";
 
 export default function HomePage() {
   return (
@@ -32,6 +33,7 @@ export default function HomePage() {
         <ContactSection />
       </main>
       <SiteFooter />
+      <SocialRail />
       <BackToTop />
       <Assistant />
     </>
