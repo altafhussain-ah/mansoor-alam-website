@@ -1,6 +1,0 @@
-# Site address — update if you move to your own domain
-User-agent: *
-Allow: /
-Disallow: /admin/
-
-Sitemap: https://prof-mansoor-alam.netlify.app/sitemap.xml
