@@ -82,7 +82,12 @@ function structuredData() {
     image: `${siteUrl}/${profile.seo.ogImage}`,
     url: `${siteUrl}/`,
     knowsAbout: researchAreas.map((area) => area.title),
-    sameAs: Object.values(profile.socialLinks).filter((url) => !isBlank(url)),
+    // sameAs is for profiles that identify the same person. A wa.me link is
+    // a way to message him, not an identity, so it is left out — which also
+    // keeps the phone number out of the structured data.
+    sameAs: Object.entries(profile.socialLinks)
+      .filter(([key, url]) => key !== "whatsapp" && !isBlank(url))
+      .map(([, url]) => url),
   };
 }
 
