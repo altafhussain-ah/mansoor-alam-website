@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Design tokens — the single source of truth for the palette.
+   Names avoid Tailwind's built-ins (slate/rose/amber) so the
+   defaults stay available alongside these.
+     steel  = dark surfaces (hero, header, footer)
+     maroon = primary accent
+     blush/ember = the warm end of the accent gradient
+     mist   = light surfaces
+     ink    = body text
+   ========================================================= */
+@theme {
+  --color-steel-950: #161b22;
+  --color-steel-900: #1f2733;
+  --color-steel-800: #2a3441;
+  --color-steel-700: #3a4655;
+  --color-steel-600: #4f5d6e;
+
+  --color-maroon-700: #6e1a26;
+  --color-maroon-600: #8a2232;
+  --color-maroon-500: #a32a3d;
+  --color-maroon-400: #e39aa5;
+
+  --color-blush-500: #e0566b;
+  --color-blush-400: #f08a9a;
+  --color-ember-400: #f2a97d;
+
+  --color-mist-50: #f8f9fa;
+  --color-mist-100: #f1f3f5;
+  --color-mist-200: #e6e9ed;
+
+  --color-ink-900: #1a2027;
+  --color-ink-700: #3c4650;
+  --color-ink-500: #5f6b77;
+
+  --color-line: #dde1e6;
+  --color-danger: #9b2c2c;
+
+  /* next/font injects these; the stacks below are the fallbacks. */
+  --font-sans: var(--font-source-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  --shadow-card: 0 1px 2px rgba(22, 27, 34, 0.06), 0 2px 8px rgba(22, 27, 34, 0.05);
+  --shadow-lift: 0 18px 40px -18px rgba(22, 27, 34, 0.35);
+  --shadow-glow: 0 10px 30px -10px rgba(224, 86, 107, 0.55);
+
+  /* Extra breakpoints matching the original stylesheet's media queries,
+     so the rebuilt layout breaks at exactly the same widths. */
+  --breakpoint-xs: 400px;
+  --breakpoint-cards: 700px;
+  --breakpoint-wide: 900px;
+  --breakpoint-quad: 1100px;
+  --breakpoint-nav: 1181px;
+
+  --animate-orb-float: orb-float 14s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 2.2s ease-in-out infinite;
+  --animate-spin-slow: spin 40s linear infinite;
+  --animate-launcher: launcher-pulse 3s ease-in-out infinite;
+  --animate-msg-in: msg-in 0.22s ease;
+}
+
+/* Gradients are plain variables: they are painted, not utility-generated. */
+:root {
+  --grad-accent: linear-gradient(
+    135deg,
+    var(--color-maroon-500) 0%,
+    var(--color-blush-500) 60%,
+    var(--color-ember-400) 100%
+  );
+  --grad-dark: linear-gradient(160deg, #10151c 0%, #1f2733 55%, #2b1c26 100%);
+  --nav-height: 76px;
+}
+
+@keyframes orb-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 25px) scale(1.08);
+  }
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(224, 86, 107, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(224, 86, 107, 0);
+  }
+}
+@keyframes launcher-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 14px 34px -10px rgba(224, 86, 107, 0.75),
+      0 0 0 0 rgba(224, 86, 107, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 14px 34px -10px rgba(224, 86, 107, 0.75),
+      0 0 0 10px rgba(224, 86, 107, 0);
+  }
+}
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes typing-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-height) + 8px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-ink-900);
+    background: var(--color-mist-50);
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    color: var(--color-steel-900);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--color-steel-700);
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: var(--color-steel-900);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-maroon-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* Dark surfaces need the lighter accent to stay visible. */
+  .on-dark :focus-visible {
+    outline-color: var(--color-maroon-400);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   Utilities for effects that utilities alone express poorly.
+   ========================================================= */
+
+/** Fills with the accent gradient. */
+@utility bg-accent {
+  background-image: var(--grad-accent);
+}
+
+/** The dark hero/footer wash. */
+@utility bg-dark-wash {
+  background-image: var(--grad-dark);
+}
+
+/** Clips the accent gradient to the text itself. */
+@utility text-accent-gradient {
+  background-image: var(--grad-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/** The hero name's own gradient — lighter than the accent so it reads on dark. */
+@utility text-name-gradient {
+  background-image: linear-gradient(
+    100deg,
+    #fff 0%,
+    #fde3e7 40%,
+    var(--color-blush-400) 80%,
+    var(--color-ember-400) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/** Frosted panel used by the nav, hero stats and ghost buttons. */
+@utility glass {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/** The faint graph-paper overlay behind the hero. */
+@utility hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 30%, transparent 80%);
+}
+
+/** Section background: light mist with a warm bloom in the top-right. */
+@utility bg-section-tint {
+  background-image: radial-gradient(
+    900px 400px at 100% 0%,
+    rgba(224, 86, 107, 0.06),
+    transparent 60%
+  );
+  background-color: var(--color-mist-100);
+}
+
+/**
+ * Two-tone border: white fill, gradient edge. Used for the "Current" role.
+ */
+@utility border-gradient {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    var(--grad-accent) border-box;
+}
+
+/* =========================================================
+   Assistant replies.
+   These are HTML strings built in lib/assistant.ts, so Tailwind
+   cannot see the class names — they are written out in full here.
+   ========================================================= */
+.ai-msg ul {
+  margin: 6px 0 4px;
+  padding-left: 18px;
+  list-style: disc;
+}
+.ai-msg li {
+  margin: 4px 0;
+}
+.ai-msg a {
+  color: var(--color-maroon-600);
+  font-weight: 600;
+}
+.ai-muted {
+  color: var(--color-ink-500);
+  font-size: 0.86em;
+}
+.ai-note {
+  color: var(--color-danger);
+  font-size: 0.86em;
+  font-weight: 600;
+}
+.ai-jump {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(163, 42, 61, 0.3);
+  background: rgba(163, 42, 61, 0.06);
+  color: var(--color-maroon-600);
+  font: 600 0.82rem var(--font-sans);
+  cursor: pointer;
+}
+.ai-jump:hover {
+  background: rgba(163, 42, 61, 0.12);
+}
+
+/* =========================================================
+   Scroll reveal.
+   Starts visible and is only hidden once JS confirms it can
+   animate, so content is never stranded invisible if the
+   observer never fires.
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  [data-reveal] {
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .site-header,
+  .no-print {
+    display: none !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

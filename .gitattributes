@@ -1,0 +1,11 @@
+# Keep line endings consistent whoever edits — locally, or via the admin panel.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

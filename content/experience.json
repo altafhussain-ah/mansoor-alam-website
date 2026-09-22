@@ -1,0 +1,151 @@
+{
+  "items": [
+    {
+      "current": true,
+      "title": "Professor of Computer Science",
+      "organization": "Riphah International University",
+      "department": "Faculty of Computing",
+      "location": "Islamabad, Pakistan",
+      "startDate": "Sept 2021",
+      "endDate": "Present",
+      "responsibilities": [
+        "HEC Approved Supervisor",
+        "Teaching and supervision duties: [Information to be added]"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Visiting Professor",
+      "organization": "University of Technology Sydney",
+      "department": "Faculty of Engineering and Information Technology",
+      "location": "Sydney, Australia",
+      "startDate": "Jan 2022",
+      "endDate": "Present",
+      "responsibilities": [],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Adjunct Professor",
+      "organization": "Multimedia University",
+      "department": "Faculty of Computing & Informatics",
+      "location": "Cyberjaya, Malaysia",
+      "startDate": "Feb 2022",
+      "endDate": "Present",
+      "responsibilities": [
+        "Supervising 7 post-doctoral researchers (funded positions: publication fee, training and material covered)"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Adjunct Professor (Computer Science) & MS/PhD Supervisor",
+      "organization": "Universiti Kuala Lumpur",
+      "department": "",
+      "location": "Kuala Lumpur, Malaysia",
+      "startDate": "Sept 2013",
+      "endDate": "Present",
+      "responsibilities": [
+        "Adjunct Professor (Computer Science), Dec 2017 – Nov 2021",
+        "Supervisor, MS/PhD, Sept 2013 – present"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Professor of Computer Science",
+      "organization": "Institute of Business Management (IoBM)",
+      "department": "College of Computer Science and Information Systems",
+      "location": "Karachi, Pakistan",
+      "startDate": "May 2016",
+      "endDate": "Aug 2021",
+      "responsibilities": [
+        "Dean, College of Computer Science and Information Systems (Feb 2021 – Aug 2021)",
+        "Associate Dean, College of Computer Science and Information Systems (May 2019 – Jan 2021)",
+        "Acting Director, OGS — research head (Sept 2020 – Dec 2020)",
+        "Head of Department, Computer Science & MIS (May 2019 – Aug 2021)",
+        "Head of Department, Mathematics & Statistics (May 2019 – Sept 2020)",
+        "Operational Head of online teaching and training via LMS during COVID-19",
+        "Associate Professor, College of Computer Science & Information Systems and College of Engineering and Sciences (dates: [Information to be added])"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "[Information to be added]",
+      "organization": "Laureate Online Education (Colorado State University)",
+      "department": "",
+      "location": "United States (online)",
+      "startDate": "Aug 2013",
+      "endDate": "June 2016",
+      "responsibilities": [],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Associate Professor / Assistant Professor",
+      "organization": "Saudi Electronic University",
+      "department": "College of Computing and Informatics",
+      "location": "Kingdom of Saudi Arabia",
+      "startDate": "Aug 2013",
+      "endDate": "July 2016",
+      "responsibilities": [
+        "Associate Professor, Jan 2015 – July 2016",
+        "Assistant Professor, Aug 2013 – Jan 2015",
+        "Research Cluster Head: Telecommunication and Networks cluster",
+        "Course Coordinator of the undergraduate programme",
+        "Course Coordinator of MSIS (Aug 2015 – July 2016)",
+        "Chairman, Online Teaching and Faculty Development Committee"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Senior Lecturer",
+      "organization": "Universiti Kuala Lumpur",
+      "department": "Malaysian Institute of Information Technology (MIIT)",
+      "location": "Kuala Lumpur, Malaysia",
+      "startDate": "Dec 2008",
+      "endDate": "Aug 2013",
+      "responsibilities": [
+        "Research Cluster Head: Machine Learning research team",
+        "Instructor, 3-month CISCO training programme at AMA University, Manama, Bahrain (May 2013 – July 2013)"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Visiting Faculty",
+      "organization": "Multiple institutions",
+      "department": "",
+      "location": "Pakistan, Malaysia, Hong Kong, Saudi Arabia, Australia",
+      "startDate": "[Information to be added]",
+      "endDate": "",
+      "responsibilities": [
+        "NU FAST Karachi; SZABIST Karachi",
+        "Open University Hong Kong; Open University Malaysia",
+        "Universiti Kuala Lumpur (UniKL MIIT and UniKL MFI); Universiti Malaysia Pahang; Multimedia University, Malaysia",
+        "Umm Al-Qura University and King Abdullah University of Science and Technology, KSA",
+        "University of Technology Sydney, Australia"
+      ],
+      "achievements": []
+    },
+    {
+      "current": false,
+      "title": "Editorial, Review & Professional Service",
+      "organization": "Journals, HEC and professional societies",
+      "department": "",
+      "location": "",
+      "startDate": "[Information to be added]",
+      "endDate": "",
+      "responsibilities": [
+        "Editor, International Transactions on Electrical Energy Systems",
+        "Reviewer, QAA — Higher Education Commission (HEC), Pakistan",
+        "Reviewer for 4 impact-factor journals",
+        "Member: International Association of Engineers (IAENG); Society of Digital Information and Wireless Communication (SDIWC); International Association of Computer Science and Information Technology (IACSIT)"
+      ],
+      "achievements": []
+    }
+  ]
+}
